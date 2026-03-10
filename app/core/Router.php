@@ -32,13 +32,13 @@ public function run(): void
         $pattern =str_replace(
             '{id}',
             '([0-9]+)',
-            $route['uri']
+            $router['uri']
         );
 
         $pattern = '#^' . $pattern . '$#';
 
         if (preg_match($pattern, $uri, $matches)) {
-            require_once './app/controllers/'.$route['controller'].'.php';
+            require_once '../app/controllers/'.$route['controller'].'.php';
             array_shift($matches);
 
             $controllerClass = 'App\\Controllers\\' . $route['controller'];
@@ -52,14 +52,14 @@ public function run(): void
 
 
     if ($method == 'GET' && $uri == '/students'){
-       require_once './app/controllers/StudentsController.php';
+       require_once '../app/controllers/StudentsController.php';
          $controller = new StudentsController();
          $controller->index();
         return;
     }  
 
     if ($method == 'GET' && $uri == '/students/create'){
-        require_once './app/controllers/StudentsController.php';
+        require_once '../app/controllers/StudentsController.php';
          $controller = new StudentsController();
          $controller->create();
         return;
