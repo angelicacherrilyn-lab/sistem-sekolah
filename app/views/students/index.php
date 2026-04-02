@@ -46,7 +46,7 @@
                                 <a href="" class="text-green-500">Detail</a>
                                 <a href="" class="text-yellow-500">Edit</a>
                                 <a href="" class="text-red-500">Hapus</a>
-                            </div>
+                            </div>  
                         </td>
                     </tr>
                 </tbody>
