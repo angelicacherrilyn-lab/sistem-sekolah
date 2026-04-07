@@ -1,72 +1,52 @@
 <?php
 
-
 namespace App\Core;
 
-use App\Controllers\StudentsController;
+use App\Controllers\StudentController;
 
 class Router
-
 {
+    private array $routes = [];
 
-private array $routes = [];
-public function add(string $method, string $uri, string $controller, string $function)
+    public function add(string $method, string $uri, string $controller, string $function)
+    {
+        $this->routes[] = [
+            'method' => $method,
+            'uri' => $uri,
+            'controller' => $controller,
+            'function' => $function,
+        ];
+    }
 
-{
- $this->routes[] = [
-    'method' => $method,
-    'uri' => $uri,
-    'controller' => $controller,
-    'function' => $function,
- ];
- 
-} 
+    public function run()
+    {
+        $method = $_SERVER['REQUEST_METHOD'];
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-public function run(): void
+        foreach ($this->routes as $route) {
+            $pattern = str_replace(
+                '{id}',
+                '([0-9]+)',
+                $route['uri']
+            );
 
-{
-    $method = $_SERVER['REQUEST_METHOD'];
-    $uri = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+            $pattern = '#^' . $pattern . '$#';
 
-    foreach($this->routes as $router){
-        $pattern =str_replace(
-            '{id}',
-            '([0-9]+)',
-            $router['uri']
-        );
+            if (preg_match($pattern, $uri, $matches)) {
+                require_once '../app/controllers/' . $route['controller'] . '.php';
+                array_shift($matches);
+                $controllerClass = 'App\\Controllers\\' . $route['controller'];
+                $controller = new $controllerClass();
 
-        $pattern = '#^' . $pattern . '$#';
+                $function = $route['function'];
+                call_user_func_array([$controller, $function], $matches);
 
-        if (preg_match($pattern, $uri, $matches)) {
-            require_once '../app/controllers/'.$route['controller'].'.php';
-            array_shift($matches);
-
-            $controllerClass = 'App\\Controllers\\' . $route['controller'];
-            $controller = new $controllerClass();
-
-            $function = $route['function'];
-            call_user_func_array(callback:[$controller,$function],args : $matches);
-            return;
+                return;
+            }
         }
+
+        http_response_code(404);
+        echo '<h1>404 - Page Not Found</h1>';
     }
 
-
-    if ($method == 'GET' && $uri == '/students'){
-       require_once '../app/controllers/StudentsController.php';
-         $controller = new StudentsController();
-         $controller->index();
-        return;
-    }  
-
-    if ($method == 'GET' && $uri == '/students/create'){
-        require_once '../app/controllers/StudentsController.php';
-         $controller = new StudentsController();
-         $controller->create();
-        return;
-    }
-
-
-    http_response_code(404);
-    echo '<h1>404 - Page Not Found</h1>';
-}
 }
