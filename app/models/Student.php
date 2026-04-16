@@ -18,7 +18,7 @@ class Student extends Database
         $stmt = $this -> connection -> prepare($query);
         $stmt -> execute();
 
-        $result =  $stmt -> get_result();
+        $result = $stmt -> get_result();
 
         while($student = $result -> fetch_assoc()) {
             $students [] = $student; 
@@ -26,5 +26,23 @@ class Student extends Database
 
         return $students; 
     }
+
+    // Fungsi menampilkan detail siswa
+    public function getStudent(int $id)
+    {
+        $query = "SELECT * FROM {$this -> table} WHERE id = ?";
+
+        $stmt =  $this -> connection -> prepare($query);
+        $stmt -> bind_param ('i', $id);
+        $stmt -> execute();
+
+        $result = $stmt -> get_result();
+
+        $student = $result -> fetch_assoc();
+
+        return $student; 
+    }
+
 }
+
 ?>
