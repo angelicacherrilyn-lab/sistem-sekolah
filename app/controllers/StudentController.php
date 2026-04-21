@@ -6,7 +6,7 @@
     use App\Core\Controller;
     use App\Models\Student;
 
-    class StudentsController extends Controller
+    class StudentController extends Controller
     {
 
         public function index()
@@ -40,6 +40,12 @@
             $this -> view('students.edit');
         }
 
+
+        public function store()
+        {
+            $studentModel = new Student ();
+            $studentModel -> insert($_POST);
+        }
     }
  
  

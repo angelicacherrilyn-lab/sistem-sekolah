@@ -5,11 +5,13 @@ use App\Core\Router;
 
 $router = new Router();
 //register router
-$router -> add('GET','/students', 'StudentsController','index');
-$router -> add('GET', '/students/create', 'StudentsController','create');
-$router -> add('GET', '/students/{id}', 'StudentsController','show');
-$router -> add('GET', '/students/{id}/edit', 'StudentsController','edit');
+$router -> add('GET','/students', 'StudentController','index');
+$router -> add('GET', '/students/create', 'StudentController','create');
+$router -> add('GET', '/students/{id}', 'StudentController','show');
+$router -> add('GET', '/students/{id}/edit', 'StudentController','edit');
 
+
+$router -> add('POST', '/students', 'StudentController', 'store');
 
 $router -> run();
 

@@ -5,7 +5,7 @@
             </div>
         
         <div class="p-4 bg-white shadow rounded-lg p-4">
-           <form action="" class= "grid grid-cols-2 gap-4">
+           <form action="/students" method="POST" class= "grid grid-cols-2 gap-4">
                 <div class= "space-y-2">
                     <label class= "block font-bold" for="name">Nama</label>
                     <input class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan Nama" name="name">
@@ -16,7 +16,7 @@
                 </div>
                 <div class= "space-y-2">
                     <label class= "block font-bold" for="NIS">NIS</label>
-                    <input class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan NIS" name="NIS">
+                    <input class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan NIS" name="nis">
                 </div>
                 <div class= "space-y-2">
                     <label class= "block font-bold" for="phone_number">Nomor Telepon</label>
