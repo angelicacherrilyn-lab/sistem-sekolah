@@ -6,22 +6,23 @@
             </div>
         
         <div class="p-4 bg-white shadow rounded-lg p-4">
-           <form action="" class= "grid grid-cols-2 gap-4">
+           <form action="/students/<?= $student['id']?>" method="POST" class= "grid grid-cols-2 gap-4">
+            <input type="hidden" name="_method" value="PUT">
                 <div class= "space-y-2">
                     <label class= "block font-bold" for="name">Nama</label>
-                    <input class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan Nama" name="name">
+                    <input value= "<?= $student['name']?>" class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan Nama" name="name">
                 </div>
                 <div class= "space-y-2">
                     <label class= "block font-bold" for="class">Kelas</label>
-                    <input class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan Kelas" name="class">
+                    <input value= "<?= $student['class']?>" class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan Kelas" name="class">
                 </div>
                 <div class= "space-y-2">
-                    <label class= "block font-bold" for="NIS">NIS</label>
-                    <input class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan NIS" name="NIS">
+                    <label class= "block font-bold" for="nis">NIS</label>
+                    <input value= "<?= $student['nis']?>" class= "w-full px-4 py-2 border rounded-lg" type="text" id="nis" placeholder="Masukan NIS" name="nis">
                 </div>
                 <div class= "space-y-2">
                     <label class= "block font-bold" for="phone_number">Nomor Telepon</label>
-                    <input class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan Nomor Telepon" name="phone_number">
+                    <input value= "<?= $student['phone_number']?>" class= "w-full px-4 py-2 border rounded-lg" type="text" id="name" placeholder="Masukan Nomor Telepon" name="phone_number">
                 </div>
 
                 <div class="flex justify-end col-span-2">
@@ -30,3 +31,4 @@
                 </div>
            </form>
         </div>
+ 
